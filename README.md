@@ -1,2 +1,3 @@
-# centilsec-clock.github.io
-埋め込み用デジタル時計
+# clock and countdown
+- [clock](./clock.html)
+- [countdown](./countdown.html)
