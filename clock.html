@@ -10,16 +10,23 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            flex-direction: column; /* 日付を時計の上に配置 */
             height: 100vh;
             margin: 0;
             background-color: #000; /* 黒い背景 */
         }
+        #date {
+            font-size: 5vw; /* 日付のフォントサイズを時計の半分に設定 */
+            color: #fff;
+            font-family: 'Menlo', monospace; /* Menloフォントを適用 */
+            margin-bottom: 1vw;
+        }
         #clock {
-            font-size: 15vw; /* フォントサイズをビュー幅に応じて調整 */
+            font-size: 15vw; /* 時計のフォントサイズを設定 */
             color: #fff;
             font-family: 'Menlo', monospace; /* Menloフォントを適用 */
             letter-spacing: 1vw; /* 文字の間隔もビュー幅に基づいて調整 */
-            width: 95%; /* 幅を90%に設定 */
+            width: 90vw; /* 幅を90%に設定 */
             text-align: center; /* テキストを中央揃え */
             white-space: nowrap; /* テキストが折り返されないように */
         }
@@ -27,17 +34,34 @@
 </head>
 <body>
 
+<div id="date">0000/00/00 Err</div>
 <div id="clock">00:00:00.00</div>
 
 <script>
     function updateClock() {
         const now = new Date();
+
+        // 日付を0埋めで取得
+        const year = now.getFullYear();
+        const month = String(now.getMonth() + 1).padStart(2, '0'); // 月は0が1月なので+1
+        const day = String(now.getDate()).padStart(2, '0');
+
+        // 曜日を取得
+        const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+        const dayOfWeek = weekdays[now.getDay()];
+
+        // 時刻を0埋めで取得
         const hours = String(now.getHours()).padStart(2, '0');
         const minutes = String(now.getMinutes()).padStart(2, '0');
         const seconds = String(now.getSeconds()).padStart(2, '0');
         const milliseconds = String(Math.floor(now.getMilliseconds() / 10)).padStart(2, '0'); // 10ms単位に変換して0埋め
 
+        // 日付と時刻の文字列を作成
+        const dateString = `${year}/${month}/${day} ${dayOfWeek}`;
         const timeString = `${hours}:${minutes}:${seconds}.${milliseconds}`;
+
+        // HTMLに反映
+        document.getElementById('date').textContent = dateString;
         document.getElementById('clock').textContent = timeString;
     }
 
