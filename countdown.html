@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CountDown</title>
+    <style>
+        body {
+            font-family: 'Menlo', monospace; /* Menloフォントを適用 */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            background-color: #000; /* 黒い背景 */
+        }
+        #event-name {
+            font-size: 6vw; /* イベント名のフォントサイズを倍に */
+            color: #fff;
+            width: 90vw; /* ページ幅の90% */
+            text-align: center;
+            word-wrap: break-word; /* 折り返しを許可 */
+        }
+        #event-date {
+            font-size: 6vw; /* イベント日付のフォントサイズ */
+            color: #fff;
+            width: 90vw; /* ページ幅の90% */
+            text-align: center;
+            word-wrap: break-word; /* 折り返しを許可 */
+        }
+        #countdown {
+            font-size: 10vw; /* D, H, M, Sのフォントサイズを倍に */
+            color: #fff;
+            width: 90vw; /* ページ幅の90% */
+            text-align: center;
+            word-wrap: break-word; /* 折り返しを許可 */
+        }
+        small {
+            font-size: 0.5em; /* smallタグでフォントサイズを小さく */
+        }
+    </style>
+</head>
+<body>
+
+<div id="event-name"><small>Add eventname and eventdate at the end of the URL<br> in the form of <pre>[URL]?eventname=hoge&eventdate=yyyy/mm/dd/hour:minute</pre></small></div>
+<div id="event-date">No Date Specified</div>
+<div id="countdown">D <small>d</small> H <small>h</small> M <small>m</small> S <small>s</small></div>
+
+<script>
+    function getQueryParams() {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            eventname: params.get('eventname') || '<small>Add eventname and eventdate at the end of the URL<br> in the form of <pre>[URL]?eventname=hoge&eventdate=yyyy/mm/dd/hour:minute</pre></small>',
+            eventdate: params.get('eventdate') || 'No Date Specified' // hours:minutes形式
+        };
+    }
+
+    function updateCountdown() {
+        const { eventname, eventdate } = getQueryParams();
+
+        // イベントの日付をパース
+        const [year, month, day, hourMinute] = eventdate.split('/');
+        let [hour, minute] = hourMinute.split(':').map(Number);
+
+        // hour と minute を 0 埋めして 2 桁にする
+        hour = String(hour).padStart(2, '0');
+        minute = String(minute).padStart(2, '0');
+
+        const eventTime = new Date(year, month - 1, day, hour, minute);
+
+        // 現在の時刻
+        const now = new Date();
+        const timeDiff = eventTime - now;
+
+        // 残り時間を計算
+        const daysLeft = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hoursLeft = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutesLeft = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+        const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+        // イベント名と日付を表示（hours:minutes形式に修正）
+        document.getElementById('event-name').innerHTML = `${eventname}`;
+        document.getElementById('event-date').innerHTML = `Scheduled: ${year}/${month}/${day} ${hour}:${minute}`;
+
+        // カウントダウンの時間を表示し、d, h, m, sを<small>タグで囲む
+        document.getElementById('countdown').innerHTML = `
+            ${daysLeft}<small>d</small> 
+            ${hoursLeft}<small>h</small> 
+            ${minutesLeft}<small>m</small> 
+            ${secondsLeft}<small>s</small>`;
+    }
+
+    setInterval(updateCountdown, 1000); // 1秒ごとにカウントダウンを更新
+</script>
+
+</body>
+</html>
