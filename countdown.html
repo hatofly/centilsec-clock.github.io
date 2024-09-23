@@ -13,10 +13,13 @@
             flex-direction: column;
             height: 100vh;
             margin: 0;
+            color:#fff;
             background-color: #000; /* 黒い背景 */
         }
         #event-name {
-            font-size: 6vw; /* イベント名のフォントサイズを倍に */
+            font-size: 8vw; /* イベント名のフォントサイズを倍に */
+            transform: scale(0.8,1);
+            font-weight: bold;
             color: #fff;
             width: 90vw; /* ページ幅の90% */
             text-align: center;
@@ -28,6 +31,13 @@
             width: 90vw; /* ページ幅の90% */
             text-align: center;
             word-wrap: break-word; /* 折り返しを許可 */
+        }
+        #active_remain_time{
+            font-size:3vw;
+            font-weight:bold;
+            width:80vw;
+            text-align: left;
+            color:#000;
         }
         #countdown {
             font-size: 10vw; /* D, H, M, Sのフォントサイズを倍に */
@@ -45,7 +55,8 @@
 
 <div id="event-name"><small>Add eventname and eventdate at the end of the URL<br> in the form of <pre>[URL]?eventname=hoge&eventdate=yyyy/mm/dd/hour:minute</pre></small></div>
 <div id="event-date">No Date Specified</div>
-<div id="countdown">D <small>d</small> H <small>h</small> M <small>m</small> S <small>s</small></div>
+<div id="active_remain_time"><span style="background-color:#fff;">ACTIVE REMAINING TIME:</span></div>
+<div id="countdown"><span style="border:solid;"> D <small>d</small> H <small>h</small> M <small>m</small> S <small>s</small></span></div>
 
 <script>
     function getQueryParams() {
@@ -81,14 +92,16 @@
 
         // イベント名と日付を表示（hours:minutes形式に修正）
         document.getElementById('event-name').innerHTML = `${eventname}`;
-        document.getElementById('event-date').innerHTML = `Scheduled: ${year}/${month}/${day} ${hour}:${minute}`;
+        document.getElementById('event-date').innerHTML = `<small style="transform:scale(0.8,1)">SCHEDULED:</small> ${year}/${month}/${day} ${hour}:${minute}`;
 
         // カウントダウンの時間を表示し、d, h, m, sを<small>タグで囲む
         document.getElementById('countdown').innerHTML = `
+        <span style="border:solid;">
             ${daysLeft}<small>d</small> 
             ${hoursLeft}<small>h</small> 
             ${minutesLeft}<small>m</small> 
-            ${secondsLeft}<small>s</small>`;
+            ${secondsLeft}<small>s</small>
+        </span>`;
     }
 
     setInterval(updateCountdown, 1000); // 1秒ごとにカウントダウンを更新
