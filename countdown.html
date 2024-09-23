@@ -6,7 +6,7 @@
     <title>CountDown</title>
     <style>
         body {
-            font-family: 'MS Sans Serif';
+            font-family: 'Arial';
             transform: scale(0.9,1);
             display: flex;
             justify-content: center;
@@ -14,23 +14,24 @@
             flex-direction: column;
             height: 100vh;
             margin: 0;
-            color:#fff;
+            color:darkorange;
             background-color: #000; /* 黒い背景 */
         }
         #event-name {
             font-size: 8vw; /* イベント名のフォントサイズを倍に */
+            font-family: 'MS Gothic';
             transform: scale(0.8,1);
             font-weight: bold;
-            color: #fff;
-            width: 90vw; /* ページ幅の90% */
-            text-align: center;
+            color: darkorange;
+            width: 100vw; /* ページ幅の90% */
+            text-align: left;
             word-wrap: break-word; /* 折り返しを許可 */
         }
         #event-date {
             font-size: 6vw; /* イベント日付のフォントサイズ */
-            color: #fff;
-            width: 90vw; /* ページ幅の90% */
-            text-align: center;
+            color: darkorange;
+            width: 80vw; /* ページ幅の90% */
+            text-align: left;
             word-wrap: break-word; /* 折り返しを許可 */
         }
         #active_remain_time{
@@ -42,9 +43,9 @@
         }
         #countdown {
             font-size: 10vw; /* D, H, M, Sのフォントサイズを倍に */
-            color: #fff;
-            width: 90vw; /* ページ幅の90% */
-            text-align: center;
+            color: darkorange;
+            width: 80vw; /* ページ幅の90% */
+            text-align: left;
             word-wrap: break-word; /* 折り返しを許可 */
         }
         small {
@@ -56,8 +57,8 @@
 
 <div id="event-name"><small>Add eventname and eventdate at the end of the URL<br> in the form of <pre>[URL]?eventname=hoge&eventdate=yyyy/mm/dd/hour:minute</pre></small></div>
 <div id="event-date">No Date Specified</div>
-<div id="active_remain_time"><span style="background-color:#fff;">ACTIVE REMAINING TIME:</span></div>
-<div id="countdown"><span style="border:0.2vw solid;"> D <small>d</small> H <small>h</small> M <small>m</small> S <small>s</small></span></div>
+<div id="active_remain_time"><span style="background-color:darkorange;">ACTIVE REMAINING TIME:</span></div>
+<div id="countdown"><span style="border: 0.2vw solid;"> D <small>d</small> H <small>h</small> M <small>m</small> S <small>s</small></span></div>
 
 <script>
     function getQueryParams() {
