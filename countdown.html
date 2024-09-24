@@ -8,10 +8,7 @@
         body {
             font-family: 'Arial';
             transform: scale(0.9,1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
+
             height: 100vh;
             margin: 0;
             color:orange;
@@ -20,32 +17,31 @@
         #event-name {
             font-size: 8vw; /* イベント名のフォントサイズを倍に */
             font-family: 'MS Gothic';
-            transform: scale(0.8,1);
+            
             font-weight: bold;
             color: orange;
-            width: 100vw; /* ページ幅の90% */
-            text-align: left;
+            
+            
             word-wrap: break-word; /* 折り返しを許可 */
         }
         #event-date {
             font-size: 6vw; /* イベント日付のフォントサイズ */
             color: orange;
-            width: 80vw; /* ページ幅の90% */
-            text-align: left;
+            
+           
             word-wrap: break-word; /* 折り返しを許可 */
         }
         #active_remain_time{
             font-size:3vw;
             font-weight:bold;
-            width:80vw;
-            text-align: left;
+           
+            
             color:#000;
         }
         #countdown {
             font-size: 10vw; /* D, H, M, Sのフォントサイズを倍に */
             color: orange;
-            width: 80vw; /* ページ幅の90% */
-            text-align: left;
+          
             word-wrap: break-word; /* 折り返しを許可 */
         }
         small {
@@ -54,7 +50,7 @@
     </style>
 </head>
 <body>
-
+<div><p></p></div>
 <div id="event-name"><small>Add eventname and eventdate at the end of the URL<br> in the form of <pre>[URL]?eventname=hoge&eventdate=yyyy/mm/dd/hour:minute</pre></small></div>
 <div id="event-date">No Date Specified</div>
 <div id="active_remain_time"><span style="background-color:orange;">ACTIVE REMAINING TIME:</span></div>
