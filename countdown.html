@@ -9,6 +9,7 @@
             font-family: 'Arial';
             transform: scale(0.9,1);
 
+
             margin: 0;
             color:orange;
             background-color: #000; /* 黒い背景 */
@@ -88,7 +89,7 @@
         const secondsLeft = Math.floor((timeDiff % (1000 * 60)) / 1000);
 
         // イベント名と日付を表示（hours:minutes形式に修正）
-        document.getElementById('event-name').innerHTML = `${eventname}`;
+        document.getElementById('event-name').innerHTML = `▌${eventname}`;
         document.getElementById('event-date').innerHTML = `<small style="transform:scale(0.8,1)">SCHEDULED:</small> ${year}/${month}/${day} ${hour}:${minute}`;
 
         // カウントダウンの時間を表示し、d, h, m, sを<small>タグで囲む
